@@ -15,12 +15,11 @@ setup(
     license = 'Apache License, Version 2.0',
 
     py_modules = ['nose_exclude'],
-    package_dir = {'':'src'},
-    packages = ['nose-exclude'],
     package_data = {'':['README.txt']},
     
     entry_points = {
         'nose.plugins': ['nose_exclude = nose_exclude:NoseExclude']
         },
     install_requires = ['nose'],
+    test_suite = 'tests',
 )
