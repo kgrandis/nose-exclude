@@ -8,9 +8,9 @@ directories to be excluded from testing.
 Exclude Directories
 ===================
 
-the `--exclude-dir=EXCLUDED_DIR`_ is made available after installation. It
-may be used multiple times to exclude multiple directories from testing. The
-directory paths may be absolute or relative.
+the ``--exclude-dir=`` option is made available after installation of the
+plugin. The option may be used multiple times to exclude multiple directories 
+from testing. The directory paths provided may be absolute or relative.
 
 Example::
     
@@ -24,4 +24,13 @@ Example::
 
 This example will exclude the directories test_dirs/build and 
 test_dirs/test_not_me from nosetests' test searching.
+
+
+Bugs
+====
+Please report all bugs (and patches) to http://bitbucket.org/kgrandis/nose-exclude/
+
+References
+==========
+.. _Nose: http://somethingaboutorange.com/mrl/projects/nose
 
