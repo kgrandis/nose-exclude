@@ -1,7 +1,7 @@
 import os
 from setuptools import setup
 
-f = open(os.path.join(os.path.dirname(__file__), 'README.txt'))
+f = open(os.path.join(os.path.dirname(__file__), 'README.rst'))
 long_description = f.read().strip()
 f.close()
 
@@ -15,7 +15,7 @@ setup(
     license = 'Apache License, Version 2.0',
 
     py_modules = ['nose_exclude'],
-    package_data = {'':['README.txt']},
+    package_data = {'':['README.rst']},
     
     entry_points = {
         'nose.plugins': ['nose_exclude = nose_exclude:NoseExclude']
