@@ -2,26 +2,25 @@ import os
 import logging
 from nose.plugins import Plugin
 
-log = logging.getLogger('nose.plugins.nose-exclude')
+log = logging.getLogger('nose.plugins.nose_exclude')
 
 class NoseExclude(Plugin):
 
     def options(self, parser, env=os.environ):
         """Define the command line options for the plugin."""
         super(NoseExclude, self).options(parser, env)
-
         parser.add_option(
-            "--exclude-dirs", action="append",
+            "--exclude-dir", action="append",
             dest="exclude_dirs",
-            help="Directories to exclude from test discovery. \
-                Paths can be relative to current working directory \
-                or an absolute path. [NOSE_EXCLUDE_DIRS]")
+            help="Directory to exclude from test discovery. \
+                Path can be relative to current working directory \
+                or an absolute path. May be specified multiple \
+                times. [NOSE_EXCLUDE_DIRS]")
     
     def configure(self, options, conf):
         """Configure plugin based on command line options"""
         super(NoseExclude, self).configure(options, conf)
 
-        #TODO add logging
         if not options.exclude_dirs:
             self.enabled = False
             return
@@ -40,8 +39,7 @@ class NoseExclude(Plugin):
                 cleaned_dirs.append(new_abs_d)
             else:
                 #bad path
-                #TODO
-                pass
+                raise ValueError("invalid path: %s" % d)
 
         self.exclude_dirs = cleaned_dirs
 

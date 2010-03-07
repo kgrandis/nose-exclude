@@ -6,7 +6,7 @@ setup(
     py_modules = ['nose_exclude'],
     
     entry_points = {
-        'nose.plugins': ['nose-exclude = nose_exclude:NoseExclude']
+        'nose.plugins': ['nose_exclude = nose_exclude:NoseExclude']
         },
     install_requires = ['nose'],
 )
