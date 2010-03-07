@@ -21,29 +21,29 @@ class NoseExclude(Plugin):
         """Configure plugin based on command line options"""
         super(NoseExclude, self).configure(options, conf)
 
+        self.exclude_dirs = {}
+
         if not options.exclude_dirs:
             self.enabled = False
             return
-
+        
         self.enabled = True
         root = os.getcwd()
         log.debug('cwd: %s' % root)
 
-        cleaned_dirs = []
+        # Normalize excluded directory names for lookup
         for d in options.exclude_dirs:
             if os.path.isabs(d):
-                cleaned_dirs.append(d)
+                self.exclude_dirs[d] = True
             elif os.path.isdir(d):
                 #see if it's relative
                 new_abs_d = os.path.join(root,d)
-                cleaned_dirs.append(new_abs_d)
+                self.exclude_dirs[new_abs_d] = True
             else:
                 #bad path
                 raise ValueError("invalid path: %s" % d)
 
-        self.exclude_dirs = cleaned_dirs
-
-        exclude_str = "excluding dirs: %s" % ",".join(self.exclude_dirs)
+        exclude_str = "excluding dirs: %s" % ",".join(self.exclude_dirs.keys())
         log.debug(exclude_str)
 
     def wantDirectory(self, dirname):
