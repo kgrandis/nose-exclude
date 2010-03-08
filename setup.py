@@ -5,7 +5,7 @@ f = open(os.path.join(os.path.dirname(__file__), 'README.rst'))
 long_description = f.read().strip()
 f.close()
 
-VERSION = '0.1.2'
+VERSION = '0.1.4'
 
 setup(
     name = "nose-exclude",
