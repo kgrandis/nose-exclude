@@ -27,6 +27,7 @@ setup(
 
     py_modules = ['nose_exclude'],
     package_data = {'':['README.rst']},
+    zip_safe = False,
     
     entry_points = {
         'nose.plugins': ['nose_exclude = nose_exclude:NoseExclude']
