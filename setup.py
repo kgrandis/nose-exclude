@@ -1,11 +1,10 @@
 import os
 from setuptools import setup
 
-f = open(os.path.join(os.path.dirname(__file__), 'README.rst'))
-long_description = f.read().strip()
-f.close()
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read().strip()
 
-VERSION = '0.1.4'
+VERSION = '0.1.5'
 
 setup(
     name = "nose-exclude",
@@ -13,7 +12,7 @@ setup(
     author = "Kurt Grandis",
     author_email = "kgrandis@gmail.com",
     description = "Exclude specific directories from nosetests runs.",
-    long_description = long_description,
+    long_description = read('README.rst'),
     license = 'GNU LGPL',
     url = "http://bitbucket.org/kgrandis/nose-exclude",
     classifiers = [
@@ -26,7 +25,6 @@ setup(
         ],
 
     py_modules = ['nose_exclude'],
-    package_data = {'':['README.rst']},
     zip_safe = False,
     
     entry_points = {
