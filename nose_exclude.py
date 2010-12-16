@@ -16,7 +16,7 @@ class NoseExclude(Plugin):
                 Path can be relative to current working directory \
                 or an absolute path. May be specified multiple \
                 times. [NOSE_EXCLUDE_DIRS]")
-        
+
         parser.add_option(
             "--exclude-dir-file", type="string",
             dest="exclude_dir_file",
@@ -35,11 +35,11 @@ class NoseExclude(Plugin):
             return abspath
         else:
             raise ValueError("invalid path: %s" % pathname)
-    
+
     def _load_from_file(self, filename):
         infile = open(filename)
         new_list = [l.strip() for l in infile.readlines() if l.strip()]
-            
+
         return new_list
 
     def configure(self, options, conf):
@@ -47,27 +47,31 @@ class NoseExclude(Plugin):
         super(NoseExclude, self).configure(options, conf)
 
         self.exclude_dirs = {}
-        
+
         # preload directories from file
         if options.exclude_dir_file:
             if not options.exclude_dirs:
                 options.exclude_dirs = []
-    
+
             new_dirs = self._load_from_file(options.exclude_dir_file)
             options.exclude_dirs.extend(new_dirs)
 
         if not options.exclude_dirs:
             self.enabled = False
             return
-        
+
         self.enabled = True
         root = os.getcwd()
         log.debug('cwd: %s' % root)
 
         # Normalize excluded directory names for lookup
-        for d in options.exclude_dirs:
-            abs_d = self._force_to_abspath(d)
-            self.exclude_dirs[abs_d] = True
+        for exclude_param in options.exclude_dirs:
+            # when using setup.cfg, you can specify only one 'exclude-dir'
+            # separated by some character (new line is good enough)
+            for d in exclude_param.split('\n'):
+                d = d.strip()
+                abs_d = self._force_to_abspath(d)
+                self.exclude_dirs[abs_d] = True
 
         exclude_str = "excluding dirs: %s" % ",".join(self.exclude_dirs.keys())
         log.debug(exclude_str)
