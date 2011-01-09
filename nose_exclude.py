@@ -82,6 +82,6 @@ class NoseExclude(Plugin):
             log.debug("excluded: %s" % dirname)
             return False
         else:
-            return True
+            return None
 
 
