@@ -4,7 +4,7 @@ from setuptools import setup
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read().strip()
 
-VERSION = '0.1.6'
+VERSION = '0.1.7'
 
 setup(
     name = "nose-exclude",
