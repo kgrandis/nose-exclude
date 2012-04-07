@@ -47,7 +47,20 @@ Example::
 where ``exclude_dirs.txt`` might look like: ::
 
     test_dirs/build
+    # Start a line with a '#' to include
+    # Comments
     test_dirs/test_not_me
+
+Nose Configuration Files
+========================
+
+``nose-exclude`` options can also be passed to ``nosetests`` using a ``.noserc`` or ``nose.cfg`` file. If you more than one directory are to be excluded 
+separate their values with newlines using the same configuration key: ::
+
+    [nosetests]
+    exclude-dir=test_dirs/exclude_dirs
+                test_dirs/more_excludes
+
 
 
 Bugs

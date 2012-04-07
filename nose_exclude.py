@@ -38,7 +38,8 @@ class NoseExclude(Plugin):
 
     def _load_from_file(self, filename):
         infile = open(filename)
-        new_list = [l.strip() for l in infile.readlines() if l.strip()]
+        new_list = [l.strip() for l in infile.readlines() if l.strip()
+                    and not l.startswith('#')]
 
         return new_list
 
