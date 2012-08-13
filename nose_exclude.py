@@ -40,7 +40,7 @@ class NoseExclude(Plugin):
         if os.path.exists(abspath):
             return abspath
         else:
-            raise ValueError("invalid path: %s" % pathname)
+            log.warn('The following path was not found: %s' % pathname)
 
     def _load_from_file(self, filename):
         infile = open(filename)
@@ -78,7 +78,8 @@ class NoseExclude(Plugin):
             for d in exclude_param.split('\n'):
                 d = d.strip()
                 abs_d = self._force_to_abspath(d)
-                self.exclude_dirs[abs_d] = True
+                if abs_d:
+                    self.exclude_dirs[abs_d] = True
 
         exclude_str = "excluding dirs: %s" % ",".join(self.exclude_dirs.keys())
         log.debug(exclude_str)

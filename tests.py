@@ -85,6 +85,17 @@ class TestNoseExcludeDirsEnvFile(PluginTester, unittest.TestCase):
     def test_proper_dirs_omitted(self):
         assert "FAILED" not in self.output
 
+class TestNoseExcludeDirs_Arg_Does_Not_Exist(PluginTester, unittest.TestCase):
+    """Test nose-exclude directories for a directory that doesn't exist.
+    """
+
+    activate = "--exclude-dir=test_dirs/build"
+    args = ["--exclude-dir=test_dirs/test_not_me \n --exclude-dir=test_dirs/test_i_dont_exist"]
+    plugins = [NoseExclude()]
+    suitepath = os.path.join(os.getcwd(), 'test_dirs')
+
+    def test_proper_dirs_omitted(self):
+        assert "FAILED" not in self.output
 
 if __name__ == '__main__':
     unittest.main()
