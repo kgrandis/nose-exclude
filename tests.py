@@ -59,5 +59,32 @@ class TestNoseExcludeDirs_Relative_Args_Mixed(PluginTester, unittest.TestCase):
     def test_proper_dirs_omitted(self):
         assert "FAILED" not in self.output
 
+class TestNoseExcludeEnvVariables(PluginTester, unittest.TestCase):
+    """Test nose-exclude's use of environment variables"""
+    
+    #args = ['--exclude-dir=test_dirs/test_not_me']
+    activate = "-v"
+    plugins = [NoseExclude()]
+    suitepath = os.path.join(os.getcwd(), 'test_dirs')
+    
+    env = {'NOSE_EXCLUDE_DIRS':'test_dirs/build;test_dirs/test_not_me'}
+
+    def test_proper_dirs_omitted(self):
+        assert "FAILED" not in self.output
+
+class TestNoseExcludeDirsEnvFile(PluginTester, unittest.TestCase):
+    """Test nose-exclude directories using relative paths passed
+    by file specified by environment variable
+    """
+
+    activate = "-v"
+    plugins = [NoseExclude()]
+    env = {'NOSE_EXCLUDE_DIRS_FILE':'test_dirs/exclude_dirs.txt'}
+    suitepath = os.path.join(os.getcwd(), 'test_dirs')
+
+    def test_proper_dirs_omitted(self):
+        assert "FAILED" not in self.output
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -51,6 +51,15 @@ where ``exclude_dirs.txt`` might look like: ::
     # Comments
     test_dirs/test_not_me
 
+Using Environment Variables
+---------------------------
+
+``--exclude-dir=`` can be set by the environment variables ``NOSE_EXCLUDE_DIRS``.
+Multiple exclude paths may be entered by separating them using a ``;``.
+The environment variable ``NOSE_EXCLUDE_DIRS_FILE`` when set to the path of a
+file-based exclusion list functions as though it were passed in with ``--exclude-dir-file=``.
+
+
 Nose Configuration Files
 ========================
 

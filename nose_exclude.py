@@ -9,9 +9,14 @@ class NoseExclude(Plugin):
     def options(self, parser, env=os.environ):
         """Define the command line options for the plugin."""
         super(NoseExclude, self).options(parser, env)
+        env_dirs = []
+        if 'NOSE_EXCLUDE_DIRS' in env:
+            exclude_dirs = env.get('NOSE_EXCLUDE_DIRS','')
+            env_dirs.extend(exclude_dirs.split(';'))
         parser.add_option(
             "--exclude-dir", action="append",
             dest="exclude_dirs",
+            default=env_dirs,
             help="Directory to exclude from test discovery. \
                 Path can be relative to current working directory \
                 or an absolute path. May be specified multiple \
@@ -20,6 +25,7 @@ class NoseExclude(Plugin):
         parser.add_option(
             "--exclude-dir-file", type="string",
             dest="exclude_dir_file",
+            default=env.get('NOSE_EXCLUDE_DIRS_FILE', False),
             help="A file containing a list of directories to exclude \
                 from test discovery. Paths can be relative to current \
                 working directory or an absolute path. \
