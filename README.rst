@@ -51,6 +51,26 @@ where ``exclude_dirs.txt`` might look like: ::
     # Comments
     test_dirs/test_not_me
 
+
+Excluding Specific Test Methods and Classes
+-------------------------------------------
+
+Tests can now be excluded by specifying their fully qualified test paths.
+Tests can be excluded using either ``--exclude-test`` or ``--exclude-test-file``.
+
+To exclude test methods:
+
+``--exclude-test=module1.module2.TestClass.test_method``
+
+To exclude test classes:
+
+``--exclude-test=module1.module2.TestClass``
+
+To exclude test functions:
+
+``--exclude-test-module1.module2.test_function``
+
+
 Using Environment Variables
 ---------------------------
 

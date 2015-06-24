@@ -9,7 +9,7 @@ from setuptools import setup
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read().strip()
 
-VERSION = '0.1.10'
+VERSION = '0.2.0'
 
 setup(
     name = "nose-exclude",
@@ -23,15 +23,15 @@ setup(
     classifiers = [
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",
-        ("License :: OSI Approved :: GNU Library or Lesser General " 
-        "Public License (LGPL)"), 
+        ("License :: OSI Approved :: GNU Library or Lesser General "
+        "Public License (LGPL)"),
         "Topic :: Software Development :: Testing",
         "Programming Language :: Python",
         ],
 
     py_modules = ['nose_exclude'],
     zip_safe = False,
-    
+
     entry_points = {
         'nose.plugins': ['nose_exclude = nose_exclude:NoseExclude']
         },
