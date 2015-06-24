@@ -9,7 +9,7 @@ from setuptools import setup
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read().strip()
 
-VERSION = '0.2.0'
+VERSION = '0.3.0'
 
 setup(
     name = "nose-exclude",
@@ -19,7 +19,7 @@ setup(
     description = "Exclude specific directories from nosetests runs.",
     long_description = read('README.rst'),
     license = 'GNU LGPL',
-    url = "http://bitbucket.org/kgrandis/nose-exclude",
+    url = "https://github.com/kgrandis/nose-exclude",
     classifiers = [
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Developers",

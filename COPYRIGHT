@@ -1,6 +1,6 @@
 nose-exclude is a Nose plugin that allows you to easily specify directories to be 
     excluded from testing.
-Copyright (C) 2010-2011 Kurt Grandis
+Copyright (C) 2010-2015 Kurt Grandis
 
 This library is free software; you can redistribute it and/or
 modify it under the terms of the GNU Lesser General Public
