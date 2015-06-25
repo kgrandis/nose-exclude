@@ -113,6 +113,9 @@ class NoseExclude(Plugin):
 
     def wantDirectory(self, dirname):
         """Check if directory is eligible for test discovery"""
+        # In case of symbolic paths
+        dirname = os.path.realpath(dirname)
+
         if dirname in self.exclude_dirs:
             log.debug("excluded: %s" % dirname)
             return False
