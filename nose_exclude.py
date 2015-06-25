@@ -1,8 +1,16 @@
+from __future__ import unicode_literals
+
+import sys
 import os
 import logging
 from nose.plugins import Plugin
 
 log = logging.getLogger('nose.plugins.nose_exclude')
+
+if sys.version_info > (3,):
+    get_method_class = lambda x: x.__self__.__class__
+else:
+    get_method_class = lambda x: x.im_class
 
 
 class NoseExclude(Plugin):
@@ -108,7 +116,7 @@ class NoseExclude(Plugin):
                 if abs_d:
                     self.exclude_dirs[abs_d] = True
 
-        exclude_str = "excluding dirs: %s" % ",".join(self.exclude_dirs.keys())
+        exclude_str = "excluding dirs: %s" % ",".join(list(self.exclude_dirs.keys()))
         log.debug(exclude_str)
 
     def wantDirectory(self, dirname):
@@ -140,7 +148,7 @@ class NoseExclude(Plugin):
     def wantMethod(self, meth):
         """Filter out tests based on <module path>.<class>.<method name>"""
         try:
-            cls = meth.im_class  # Don't test static methods
+            cls = get_method_class(meth)
         except AttributeError:
             return False
 
