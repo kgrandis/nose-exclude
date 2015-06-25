@@ -39,3 +39,6 @@ htmlcov/
 nosetests.xml
 coverage.xml
 *,cover
+
+# PyCharm
+.idea/
