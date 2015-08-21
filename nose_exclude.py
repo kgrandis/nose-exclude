@@ -26,7 +26,7 @@ class NoseExclude(Plugin):
             env_dirs.extend(exclude_dirs.split(';'))
 
         parser.add_option(
-            "--exclude-dir", action="append",
+            str("--exclude-dir"), action="append",
             dest="exclude_dirs",
             default=env_dirs,
             help="Directory to exclude from test discovery. \
@@ -35,7 +35,7 @@ class NoseExclude(Plugin):
                 times. [NOSE_EXCLUDE_DIRS]")
 
         parser.add_option(
-            "--exclude-dir-file", type="string",
+            str("--exclude-dir-file"), type="string",
             dest="exclude_dir_file",
             default=env.get('NOSE_EXCLUDE_DIRS_FILE', False),
             help="A file containing a list of directories to exclude \
@@ -44,14 +44,14 @@ class NoseExclude(Plugin):
                 [NOSE_EXCLUDE_DIRS_FILE]")
 
         parser.add_option(
-            "--exclude-test", action="append",
+            str("--exclude-test"), action="append",
             dest="exclude_tests",
             default=env_tests,
             help="Fully qualified name of test method or class to exclude \
             from test discovery.")
 
         parser.add_option(
-            "--exclude-test-file", type="string",
+            str("--exclude-test-file"), type="string",
             dest="exclude_test_file",
             default=False,
             help="A file containing a list of fully qualified names of \
