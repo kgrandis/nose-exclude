@@ -150,7 +150,7 @@ class NoseExclude(Plugin):
         try:
             cls = get_method_class(meth)
         except AttributeError:
-            return False
+            return None
 
         fqn = '%s.%s.%s' % (cls.__module__, cls.__name__, meth.__name__)
         if fqn in self.exclude_tests:
