@@ -25,6 +25,10 @@ class NoseExclude(Plugin):
             exclude_dirs = env.get('NOSE_EXCLUDE_DIRS', '')
             env_dirs.extend(exclude_dirs.split(';'))
 
+        if 'NOSE_EXCLUDE_TESTS' in env:
+            exclude_tests = env.get('NOSE_EXCLUDE_TESTS', '')
+            env_tests.extend(exclude_tests.split(';'))
+
         parser.add_option(
             str("--exclude-dir"), action="append",
             dest="exclude_dirs",

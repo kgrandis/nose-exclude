@@ -144,6 +144,21 @@ class TestNoseExcludeTestNegative(PluginTester, unittest.TestCase):
         assert 'Ran 3 tests' in self.output
 
 
+class TestNoseExcludeTestsEnvVariables(PluginTester, unittest.TestCase):
+    """Test nose-exclude's use of environment variables"""
+
+    activate = "-v"
+    plugins = [NoseExclude()]
+    suitepath = os.path.join(os.getcwd(), 'test_dirs/unittest')
+    env = {'NOSE_EXCLUDE_TESTS':
+        'test_dirs.unittest.tests.UnitTests.test_a;'
+        'test_dirs.unittest.tests.test_c'
+    }
+
+    def test_test_excluded(self):
+        assert 'Ran 1 test' in self.output
+
+
 class TestNoseExcludeMultipleTest(PluginTester, unittest.TestCase):
     """Test nose-exclude multiple tests"""
 
