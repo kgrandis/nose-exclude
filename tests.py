@@ -224,5 +224,53 @@ class TestNoseExcludeTestModule(PluginTester, unittest.TestCase):
     def test_tests_excluded(self):
         assert 'Ran 3 tests' in self.output
 
+
+class TestNoseExcludeSymlinkedDirs(PluginTester, unittest.TestCase, object):
+    """Test nose-exclude directories including symlink paths passed
+    on the commandline via --exclude-dir.
+
+    The test includes excluding a symlink path using the real path;
+    as well as excluding a real path (in a separate dir) using symlink path.
+    """
+
+    symlink_path = os.path.abspath('test_dirs/test_not_me_symlink')
+    symlink_path2 = os.path.abspath('test_dirs/test_not_me_external_symlink')
+    plugins = [NoseExclude()]
+    suitepath = os.path.join(os.getcwd(), 'test_dirs')
+
+    def __init__(self, *args, **kwargs):
+        os_path = os.path
+        os_symlink = os.symlink
+        self.os_unlink = os.unlink
+
+        def realSetUp():
+            real_path = os_path.abspath('test_dirs/test_not_me')
+            real_path2 = os_path.abspath('test_more_dirs/test_not_me_external')
+
+            if not os_path.exists(self.symlink_path):
+                os_symlink(real_path, self.symlink_path)
+
+            if not os_path.exists(self.symlink_path2):
+                os_symlink(real_path2, self.symlink_path2)
+
+            self.activate = "--exclude-dir=test_dirs/build"
+            self.args = ['--exclude-dir=%s' % real_path,
+                         '--exclude-dir=%s' % self.symlink_path2]
+        self.realSetUp = realSetUp
+        self.origSetUp = super(TestNoseExcludeSymlinkedDirs, self).setUp
+        super(TestNoseExcludeSymlinkedDirs, self).__init__(*args, **kwargs)
+
+    def setUp(self):
+        self.realSetUp()
+        self.origSetUp()
+
+    def tearDown(self):
+        self.os_unlink(self.symlink_path)
+        self.os_unlink(self.symlink_path2)
+
+    def test_proper_dirs_omitted(self):
+        assert "FAILED" not in self.output
+
+
 if __name__ == '__main__':
     unittest.main()
