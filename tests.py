@@ -224,5 +224,28 @@ class TestNoseExcludeTestModule(PluginTester, unittest.TestCase):
     def test_tests_excluded(self):
         assert 'Ran 3 tests' in self.output
 
+
+class TestNoseDoesNotExcludeTestClass(PluginTester, unittest.TestCase):
+    """Test nose-exclude tests by class"""
+
+    activate = "--exclude-test=test_dirs.unittest.test"
+    plugins = [NoseExclude()]
+    suitepath = os.path.join(os.getcwd(), 'test_dirs/unittest')
+
+    def setUp(self):
+        def mock_get_method_class(meth):
+            raise AttributeError('foobar')
+        import nose_exclude
+        self.old_get_method_class = nose_exclude.get_method_class
+        nose_exclude.get_method_class = mock_get_method_class
+        super(TestNoseDoesNotExcludeTestClass, self).setUp()
+
+    def tearDown(self):
+        import nose_exclude
+        nose_exclude.get_method_class = self.old_get_method_class
+
+    def test_tests_not_excluded(self):
+        assert 'Ran 3 tests' in self.output
+
 if __name__ == '__main__':
     unittest.main()
