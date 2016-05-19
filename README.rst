@@ -68,7 +68,7 @@ To exclude test classes:
 
 To exclude test functions:
 
-``--exclude-test-module1.module2.test_function``
+``--exclude-test=module1.module2.test_function``
 
 
 Using Environment Variables
