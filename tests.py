@@ -224,5 +224,18 @@ class TestNoseExcludeTestModule(PluginTester, unittest.TestCase):
     def test_tests_excluded(self):
         assert 'Ran 3 tests' in self.output
 
+
+class TestNoseExcludeTestSuperclass(PluginTester, unittest.TestCase):
+    """Test nose-exclude tests by superclass"""
+
+    activate = "--exclude-test-superclass=test_dirs.supercls.tests.TestBase"
+
+    plugins = [NoseExclude()]
+    suitepath = os.path.join(os.getcwd(), 'test_dirs/supercls')
+
+    def test_tests_excluded(self):
+        assert 'Ran 1 test' in self.output
+
+
 if __name__ == '__main__':
     unittest.main()

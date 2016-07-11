@@ -56,7 +56,8 @@ Excluding Specific Test Methods and Classes
 -------------------------------------------
 
 Tests can now be excluded by specifying their fully qualified test paths.
-Tests can be excluded using either ``--exclude-test`` or ``--exclude-test-file``.
+Tests can be excluded using ``--exclude-test``, ``--exclude-test-file``, or
+``--exclude-test-superclass``.
 
 To exclude test methods:
 
@@ -65,6 +66,10 @@ To exclude test methods:
 To exclude test classes:
 
 ``--exclude-test=module1.module2.TestClass``
+
+To exclude a test class, and all classes that inherit from it:
+
+``--exclude-test-superclass=module1.module2.TestClass``
 
 To exclude test functions:
 

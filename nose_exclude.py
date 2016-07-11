@@ -57,6 +57,13 @@ class NoseExclude(Plugin):
             help="A file containing a list of fully qualified names of \
                 test methods or classes to exclude from test discovery.")
 
+        parser.add_option(
+            str("--exclude-test-superclass"), action="append",
+            dest="exclude_superclasses",
+            default=[],
+            help="Fully qualified name of test superclass to exclude \
+            from test discovery.")
+
     def _force_to_abspath(self, pathname, root):
         if os.path.isabs(pathname):
             abspath = pathname
@@ -80,6 +87,7 @@ class NoseExclude(Plugin):
 
         self.exclude_dirs = {}
         self.exclude_tests = options.exclude_tests[:]
+        self.exclude_superclasses = options.exclude_superclasses[:]
 
         # preload directories from file
         if options.exclude_dir_file:
@@ -93,7 +101,7 @@ class NoseExclude(Plugin):
             exc_tests = self._load_from_file(options.exclude_test_file)
             self.exclude_tests.extend(exc_tests)
 
-        if not options.exclude_dirs and not self.exclude_tests:
+        if not options.exclude_dirs and not self.exclude_tests and not self.exclude_superclasses:
             self.enabled = False
             return
 
@@ -164,4 +172,8 @@ class NoseExclude(Plugin):
         if fqn in self.exclude_tests:
             return False
         else:
+            for supercls in cls.mro():
+                fqn = '%s.%s' % (supercls.__module__, supercls.__name__)
+                if fqn in self.exclude_superclasses:
+                    return False
             return None
