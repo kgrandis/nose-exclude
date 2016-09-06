@@ -74,11 +74,12 @@ To exclude test functions:
 Using Environment Variables
 ---------------------------
 
-``--exclude-dir=`` can be set by the environment variables ``NOSE_EXCLUDE_DIRS``.
-Multiple exclude paths may be entered by separating them using a ``;``.
-The environment variable ``NOSE_EXCLUDE_DIRS_FILE`` when set to the path of a
-file-based exclusion list functions as though it were passed in with ``--exclude-dir-file=``.
-
+``--exclude-dir=`` and ``--exclude-test=`` can be set by the environment
+variables ``NOSE_EXCLUDE_DIRS`` and ``NOSE_EXCLUDE_TESTS`` respectively.
+Multiple exclude paths may be entered by separating them using a ``;``. The
+environment variable ``NOSE_EXCLUDE_DIRS_FILE`` when set to the path of a
+file-based exclusion list functions as though it were passed in with
+``--exclude-dir-file=``.
 
 Nose Configuration Files
 ========================
