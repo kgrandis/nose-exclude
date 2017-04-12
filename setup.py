@@ -28,6 +28,8 @@ setup(
          "Public License (LGPL)"),
         "Topic :: Software Development :: Testing",
         "Programming Language :: Python",
+        "Programming Language :: Python :: 2",
+        "Programming Language :: Python :: 3",
         ],
 
     py_modules=['nose_exclude'],
