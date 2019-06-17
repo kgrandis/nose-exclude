@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+import re
 import sys
 import os
 import logging
@@ -128,7 +129,7 @@ class NoseExclude(Plugin):
         # In case of symbolic paths
         dirname = os.path.realpath(dirname)
 
-        if dirname in self.exclude_dirs:
+        if dirname in self.exclude_dirs and any(re.match(x, dirname) for x in self.exclude_dirs.keys()):
             log.debug("excluded: %s" % dirname)
             return False
         else:
