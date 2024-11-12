@@ -4,7 +4,7 @@ Overview
 nose-exclude is a `Nose`_ plugin that allows you to easily specify
 directories to be excluded from testing.
 
-.. _Nose: http://somethingaboutorange.com/mrl/projects/nose
+.. _Nose: https://nose.readthedocs.io/en/latest/
 
 
 Exclude Directories
